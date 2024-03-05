@@ -12,19 +12,20 @@ function getComputerChoice(){
     }
 }
 
+let computerScore=0;
+let playerScore=0;
   
-function playGame(){
-    let winCount = 0;
-    function playRound(playerSelection, computerSelection) {
+    function playRound(playerSelection, computerSelection){
         switch (playerSelection){
             case "rock":
                 switch (computerSelection){
                     case 'Rock':
                         return 'The computer also played Rock. It is a tie';
                     case 'Paper':
-                            return 'The computer played Paper. You lose.';
-                    case 'Scissors':
-                        winCount+=1;    
+                        computerScore+=1;
+                        return 'The computer played Paper. You lose.';
+                    case 'Scissors':    
+                        playerScore+=1;
                         return 'The computer played Scissors. You win!'
                 }
                 case "paper":
@@ -32,9 +33,10 @@ function playGame(){
                         case 'Paper':
                             return 'The computer also played Paper. It is a tie';
                         case 'Scissors':
-                                return 'The computer played Scissors. You lose.';
-                        case 'Rock':
-                            winCount+=1;  
+                            computerScore+=1;
+                            return 'The computer played Scissors. You lose.';
+                        case 'Rock':  
+                            playerScore+=1;
                             return 'The computer played Rock. You win!'
                             
                     }
@@ -43,19 +45,44 @@ function playGame(){
                             case 'Scissors':
                                 return 'The computer also played Scissors. It is a tie';
                             case 'Rock':
-                                    return 'The computer played Rock. You lose.';
-                            case 'Paper':
-                                winCount+=1;  
+                                computerScore+=1;
+                                return 'The computer played Rock. You lose.';
+                            case 'Paper': 
+                                playerScore+=1;
                                 return 'The computer played Paper. You win!'
                         }  
             }
-        }
+        };
       
-    for (let i=1; i<=5; i++) {
-    let playerSelection = prompt("Pick Rock, paper or scissors").toLowerCase();
-    const computerSelection = getComputerChoice();
-    console.log(playRound(playerSelection, computerSelection));}
-    console.log("You won " + winCount + " rounds.");}
+    
   
   
+  const Rock = document.querySelector("#Rock");
+  const Paper=document.querySelector("#Paper");
+  const Scissors=document.querySelector("#Scissors");
+  
+  const result=document.querySelector('#result');
+  const computer = document.querySelector('#computer');
+  const player = document.querySelector('#player');
+  Rock.addEventListener('click', function(){
+    result.textContent=playRound('rock', getComputerChoice());
+    computer.textContent= "Computer Score:" + computerScore;
+    player.textContent= "Player Score:" + playerScore;
+    if (computerScore>=5) {result.textContent="The computer won. Better luck next time...";};
+if (playerScore>=5) {result.textContent="You won!";};
+});
+  Paper.addEventListener('click', function(){
+    result.textContent=playRound('paper', getComputerChoice());
+    computer.textContent= "Computer Score:" + computerScore;
+    player.textContent= "Player Score:" + playerScore;
+    if (computerScore>=5) {result.textContent="The computer won. Better luck next time...";};
+if (playerScore>=5) {result.textContent="You won!";};
+});
+  Scissors.addEventListener('click', function(){
+    result.textContent=playRound('scissors', getComputerChoice());
+    computer.textContent= "Computer Score:" + computerScore;
+    player.textContent= "Player Score:" + playerScore;
+    if (computerScore>=5) {result.textContent="The computer won. Better luck next time...";};
+if (playerScore>=5) {result.textContent="You won!";};
+});
   
